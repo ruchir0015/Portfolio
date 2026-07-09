@@ -17,11 +17,41 @@ const getHoverGlow = (title: string) => {
     case 'linkedin':
       return 'rgba(14, 118, 168, 0.22)';
     case 'email':
-      return 'rgba(245, 158, 11, 0.22)';
+      return 'rgba(234, 67, 53, 0.22)';
     case 'resume':
-      return 'rgba(212, 168, 67, 0.22)';
+      return 'rgba(244, 15, 15, 0.22)';
     default:
       return 'rgba(255, 255, 255, 0.08)';
+  }
+};
+
+const getIconStyles = (title: string) => {
+  switch (title.toLowerCase()) {
+    case 'github':
+      return {
+        bgClass: 'bg-[#181717] border border-white/10',
+        textClass: 'text-white'
+      };
+    case 'linkedin':
+      return {
+        bgClass: 'bg-[#0a66c2]',
+        textClass: 'text-white'
+      };
+    case 'email':
+      return {
+        bgClass: 'bg-[#ea4335]',
+        textClass: 'text-white'
+      };
+    case 'resume':
+      return {
+        bgClass: 'bg-[#f40f0f]',
+        textClass: 'text-white'
+      };
+    default:
+      return {
+        bgClass: 'bg-gradient-to-br from-gold to-copper',
+        textClass: 'text-amber-950'
+      };
   }
 };
 
@@ -144,9 +174,14 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
               >
                 <div>
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-gold to-copper text-amber-950 shadow-md">
-                      {getIcon(item.title)}
-                    </div>
+                    {(() => {
+                      const styles = getIconStyles(item.title);
+                      return (
+                        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${styles.bgClass} ${styles.textClass} shadow-md`}>
+                          {getIcon(item.title)}
+                        </div>
+                      );
+                    })()}
                     <p className="text-xs tracking-[0.28em] text-slate-400 uppercase font-mono">
                       {item.title}
                     </p>

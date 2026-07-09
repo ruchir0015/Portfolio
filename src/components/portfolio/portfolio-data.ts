@@ -254,7 +254,7 @@ export const portfolioData = {
     links: [
       {
         title: "Resume",
-        href: "/resume.pdf",
+        href: "/final_Ruchir_resume.pdf",
         label: "Loot",
         description: "Full adventure log. Grab the record of prior campaigns.",
       },
@@ -272,7 +272,7 @@ export const portfolioData = {
       },
       {
         title: "Email",
-        href: "mailto:ruchirjain@example.com?subject=Portfolio%20Inquiry",
+        href: "https://mail.google.com/mail/?view=cm&fs=1&to=ruchirjain@example.com&su=Portfolio%20Inquiry",
         label: "Message",
         description: "Send a raven. Launch a direct transmission.",
       },

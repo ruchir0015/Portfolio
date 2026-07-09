@@ -206,7 +206,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Email */}
                   <ConnectButton
-                    href="mailto:ruchirjain@example.com?subject=Portfolio%20Inquiry"
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=ruchirjain@example.com&su=Portfolio%20Inquiry"
                     label="Email"
                     icon={
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
@@ -229,7 +229,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Resume */}
                   <a
-                    href="/resume.pdf"
+                    href="/final_Ruchir_resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105"
