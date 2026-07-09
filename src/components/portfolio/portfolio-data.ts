@@ -216,9 +216,9 @@ export const portfolioData = {
       {
         title: "Personal Portfolio",
         summary:
-          "Interactive Indiana Jones / Tomb Raider inspired portfolio built using: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, AI Portfolio Assistant, Voice Features, Adventure themed UI.",
+          "Interactive Indiana Jones / Tomb Raider inspired portfolio built using: React, Vite, TypeScript, Tailwind CSS, Framer Motion, AI Portfolio Assistant, Voice Features, Adventure themed UI.",
         status: "Equipped",
-        stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+        stack: ["React", "Vite", "TypeScript", "Tailwind CSS", "Framer Motion"],
         accent: "from-amber-300/70 to-orange-500/70",
       },
       {

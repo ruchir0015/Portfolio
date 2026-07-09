@@ -15,7 +15,7 @@ import {
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 import * as THREE from 'three';
 
-// Resolved as static assets from public/ folder in Next.js
+// Resolved as static assets from public/ folder
 const cardGLB = '/card.glb';
 const lanyard = '/lanyard.png';
 
