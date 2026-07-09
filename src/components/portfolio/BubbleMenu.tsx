@@ -36,35 +36,35 @@ const DEFAULT_ITEMS: MenuItem[] = [
     href: '#',
     ariaLabel: 'Home',
     rotation: -8,
-    hoverStyles: { bgColor: '#3b82f6', textColor: '#ffffff' }
+    hoverStyles: { bgColor: '#D4B896', textColor: '#2C1A0E' }
   },
   {
     label: 'about',
     href: '#',
     ariaLabel: 'About',
     rotation: 8,
-    hoverStyles: { bgColor: '#10b981', textColor: '#ffffff' }
+    hoverStyles: { bgColor: '#D4B896', textColor: '#2C1A0E' }
   },
   {
     label: 'projects',
     href: '#',
     ariaLabel: 'Documentation',
     rotation: 8,
-    hoverStyles: { bgColor: '#f59e0b', textColor: '#ffffff' }
+    hoverStyles: { bgColor: '#D4B896', textColor: '#2C1A0E' }
   },
   {
     label: 'blog',
     href: '#',
     ariaLabel: 'Blog',
     rotation: 8,
-    hoverStyles: { bgColor: '#ef4444', textColor: '#ffffff' }
+    hoverStyles: { bgColor: '#D4B896', textColor: '#2C1A0E' }
   },
   {
     label: 'contact',
     href: '#',
     ariaLabel: 'Contact',
     rotation: -8,
-    hoverStyles: { bgColor: '#8b5cf6', textColor: '#ffffff' }
+    hoverStyles: { bgColor: '#D4B896', textColor: '#2C1A0E' }
   }
 ];
 
@@ -190,6 +190,9 @@ export default function BubbleMenu({
         .bubble-menu .menu-line {
           transition: transform 0.3s ease, opacity 0.3s ease;
           transform-origin: center;
+        }
+        .bubble-menu-items .pill-link {
+          transition: background-color 200ms ease-in-out, color 200ms ease-in-out, transform 200ms ease-in-out !important;
         }
         .bubble-menu-items .pill-list .pill-col:nth-child(4):nth-last-child(2) {
           margin-left: calc(100% / 6);

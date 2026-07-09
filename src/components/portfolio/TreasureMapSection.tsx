@@ -10,9 +10,9 @@ import type {
 } from "@/components/portfolio/portfolio-data";
 
 const SVG_WIDTH = 100;
-const SVG_HEIGHT = 600;
-const START_Y = 50;
-const END_Y = 540;
+const SVG_HEIGHT = 100;
+const START_Y = 10;
+const END_Y = 90;
 
 function ShipIcon() {
   return (
@@ -196,8 +196,8 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                   />
                   {/* Compass ring decoration */}
                   <g opacity="0.3">
-                    <circle cx="15" cy="500" r="30" fill="none" stroke="#8D6E42" strokeWidth="2" />
-                    <path d="M15 470v60M0 500h30" stroke="#8D6E42" strokeWidth="1" />
+                    <ellipse cx="15" cy="83.3" rx="30" ry="5" fill="none" stroke="#8D6E42" strokeWidth="2" />
+                    <path d="M15 78.3v10M0 83.3h30" stroke="#8D6E42" strokeWidth="1" />
                   </g>
                 </svg>
 
@@ -206,7 +206,7 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                   className="absolute z-20 pointer-events-none transition-all duration-75"
                   style={{
                     left: `${shipPos.x}%`,
-                    top: `${shipPos.y}px`,
+                    top: `${shipPos.y}%`,
                     transform: `translate(-50%, -50%) rotate(${shipPos.angle}deg)`,
                   }}
                 >
@@ -219,7 +219,7 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                   className="absolute"
                   style={{
                     left: "50%",
-                    top: `${START_Y}px`,
+                    top: `${START_Y}%`,
                     transform: "translate(-50%, -50%)",
                   }}
                 >
@@ -242,7 +242,7 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                     className="absolute"
                     style={{
                       left: `${node.x}%`,
-                      top: `${node.y}px`,
+                      top: `${node.y}%`,
                       transform: "translate(-50%, -50%)",
                     }}
                   >

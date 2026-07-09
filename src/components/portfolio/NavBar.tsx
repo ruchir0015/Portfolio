@@ -8,35 +8,35 @@ const navItems = [
     href: "#hero",
     ariaLabel: "Home",
     rotation: -8,
-    hoverStyles: { bgColor: "#8B5E3C", textColor: "#FBF3E2" } /* copper/cream */
+    hoverStyles: { bgColor: "#D4B896", textColor: "#2C1A0E" }
   },
   {
     label: "about",
     href: "#about",
     ariaLabel: "About Me",
     rotation: 8,
-    hoverStyles: { bgColor: "#B8860B", textColor: "#FBF3E2" } /* gold/cream */
+    hoverStyles: { bgColor: "#D4B896", textColor: "#2C1A0E" }
   },
   {
     label: "experience",
     href: "#experience",
     ariaLabel: "Experience",
     rotation: -8,
-    hoverStyles: { bgColor: "#8B5E3C", textColor: "#FBF3E2" }
+    hoverStyles: { bgColor: "#D4B896", textColor: "#2C1A0E" }
   },
   {
     label: "projects",
     href: "#projects",
     ariaLabel: "Projects",
     rotation: 8,
-    hoverStyles: { bgColor: "#B8860B", textColor: "#FBF3E2" }
+    hoverStyles: { bgColor: "#D4B896", textColor: "#2C1A0E" }
   },
   {
     label: "connect",
     href: "#connect",
     ariaLabel: "Connect",
     rotation: -8,
-    hoverStyles: { bgColor: "#8B5E3C", textColor: "#FBF3E2" }
+    hoverStyles: { bgColor: "#D4B896", textColor: "#2C1A0E" }
   }
 ];
 

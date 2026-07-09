@@ -184,7 +184,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
                 <div className="flex flex-wrap items-end gap-4">
                   {/* GitHub */}
                   <ConnectButton
-                    href="https://github.com/"
+                    href="https://github.com/ruchir0015"
                     label="GitHub"
                     icon={
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
@@ -195,7 +195,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* LinkedIn */}
                   <ConnectButton
-                    href="https://linkedin.com/"
+                    href="https://www.linkedin.com/in/ruchir-jain-75419b311?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                     label="LinkedIn"
                     icon={
                       <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4">
@@ -206,7 +206,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Email */}
                   <ConnectButton
-                    href="mailto:your@email.com"
+                    href="mailto:ruchirjain@example.com?subject=Portfolio%20Inquiry"
                     label="Email"
                     icon={
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
@@ -229,7 +229,9 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Resume */}
                   <a
-                    href="#"
+                    href="/resume.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105"
                     style={{
                       background: `linear-gradient(135deg, ${C.gold} 0%, ${C.copper} 100%)`,

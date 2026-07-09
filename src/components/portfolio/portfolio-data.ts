@@ -254,25 +254,25 @@ export const portfolioData = {
     links: [
       {
         title: "Resume",
-        href: "#",
+        href: "/resume.pdf",
         label: "Loot",
         description: "Full adventure log. Grab the record of prior campaigns.",
       },
       {
         title: "LinkedIn",
-        href: "https://www.linkedin.com/",
+        href: "https://www.linkedin.com/in/ruchir-jain-75419b311?utm_source=share_via&utm_content=profile&utm_medium=member_android",
         label: "Connect",
         description: "Join the party. Establish a secure professional link.",
       },
       {
         title: "GitHub",
-        href: "https://github.com/",
+        href: "https://github.com/ruchir0015",
         label: "Code Trail",
         description: "Inspect the repository. Audit the source code artifacts.",
       },
       {
         title: "Email",
-        href: "mailto:ruchirjain@example.com",
+        href: "mailto:ruchirjain@example.com?subject=Portfolio%20Inquiry",
         label: "Message",
         description: "Send a raven. Launch a direct transmission.",
       },

@@ -1067,13 +1067,30 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null) as MutableRefObject<HTMLCanvasElement | null>;
     const [activeItem, setActiveItem] = useState<MenuItem | null>(null);
     const [isMoving, setIsMoving] = useState<boolean>(false);
-    const [hasInteracted, setHasInteracted] = useState<boolean>(false);
+    const [showHint, setShowHint] = useState<boolean>(true);
+    const sketchRef = useRef<InfiniteGridMenu | null>(null);
 
     useEffect(() => {
-        if (isMoving && !hasInteracted) {
-            setHasInteracted(true);
+        let timer: NodeJS.Timeout;
+        if (showHint) {
+            timer = setTimeout(() => {
+                setShowHint(false);
+            }, 2500);
         }
-    }, [isMoving, hasInteracted]);
+        return () => clearTimeout(timer);
+    }, [showHint]);
+
+    useEffect(() => {
+        let timer: NodeJS.Timeout;
+        if (isMoving) {
+            setShowHint(false);
+        } else {
+            timer = setTimeout(() => {
+                setShowHint(true);
+            }, 4000);
+        }
+        return () => clearTimeout(timer);
+    }, [isMoving]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -1094,6 +1111,7 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
                 sk => sk.run(),
                 scale
             );
+            sketchRef.current = sketch;
         }
 
         const handleResize = () => {
@@ -1109,6 +1127,26 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
             window.removeEventListener('resize', handleResize);
         };
     }, [items, scale]);
+
+    const handleNext = () => {
+        const sketch = sketchRef.current;
+        if (sketch) {
+            const q = quat.create();
+            quat.setAxisAngle(q, vec3.fromValues(0, 1, 0), -1.0);
+            quat.multiply(sketch.control.orientation, q, sketch.control.orientation);
+            sketch.control.pointerRotation = quat.create();
+        }
+    };
+
+    const handlePrev = () => {
+        const sketch = sketchRef.current;
+        if (sketch) {
+            const q = quat.create();
+            quat.setAxisAngle(q, vec3.fromValues(0, 1, 0), 1.0);
+            quat.multiply(sketch.control.orientation, q, sketch.control.orientation);
+            sketch.control.pointerRotation = quat.create();
+        }
+    };
 
     const handleButtonClick = () => {
         if (!activeItem?.link) return;
@@ -1215,22 +1253,42 @@ const InfiniteMenu: FC<InfiniteMenuProps> = ({ items = [], scale = 1.0 }) => {
                 </div>
             )}
 
-            {/* Explore Hint */}
-            <AnimatePresence>
-                {!hasInteracted && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, transition: { duration: 0.5 } }}
-                        className="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 bg-black/60 backdrop-blur-sm text-xs text-slate-300 select-none pointer-events-none"
-                    >
-                        <svg className="h-4 w-4 animate-pulse text-amber-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-                        </svg>
-                        <span>Drag to explore</span>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {/* Prev/Next Buttons */}
+            <div className="absolute inset-y-0 left-4 z-10 flex items-center pointer-events-none">
+                <button
+                    onClick={handlePrev}
+                    className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-sm text-white transition hover:bg-black/80 hover:scale-105 active:scale-95 shadow-lg shadow-black/20"
+                    aria-label="Previous project"
+                >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+            </div>
+            <div className="absolute inset-y-0 right-4 z-10 flex items-center pointer-events-none">
+                <button
+                    onClick={handleNext}
+                    className="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-sm text-white transition hover:bg-black/80 hover:scale-105 active:scale-95 shadow-lg shadow-black/20"
+                    aria-label="Next project"
+                >
+                    <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+
+            {/* Explore Hint / Persistent Affordance */}
+            <div 
+                className="absolute bottom-6 right-6 z-10 flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 bg-black/60 backdrop-blur-sm text-xs text-slate-300 select-none pointer-events-none transition-all duration-500"
+                style={{ opacity: showHint ? 1.0 : 0.4 }}
+            >
+                <svg className={`h-4 w-4 text-amber-200 ${showHint ? 'animate-pulse' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                <span className={`transition-all duration-500 overflow-hidden whitespace-nowrap ${showHint ? 'max-w-[100px] opacity-100' : 'max-w-0 opacity-0'}`}>
+                    Drag to explore
+                </span>
+            </div>
         </div>
     );
 };

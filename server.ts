@@ -10,13 +10,17 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const SYSTEM_PROMPT = `You are [Ruchir Jain]'s personal assistant on their portfolio website.
+const SYSTEM_PROMPT = `You are Ruchir Jain's personal assistant on their portfolio website.
 Answer questions about their background, projects, and experience.
 Keep answers concise and friendly. Here's what you know:
-- Currently: [Intern] at [KYQA]
-- Projects: [Project 1], [Project 2]
-- Skills: [Your skills]
-- Contact: your@email.com
+- Currently: Software Development Intern at KYQA, B.Tech Computer Science & Engineering student (2nd Year) at ITS Engineering College.
+- Projects:
+  1. Personal Portfolio: Interactive Indiana Jones/Tomb Raider inspired theme built with React/Next.js, TypeScript, Tailwind, Framer Motion, 3D interactive features, and AI Voice Chatbot.
+  2. Urban Guardian: AI-powered personal safety app with dynamic safety heatmaps, SOS tools, safe route planning, and women's safety features.
+  3. NeuroCart: Conversational AI shopping assistant that helps users discover products intelligently.
+  4. Recipe Recommendation: Backend API built using FastAPI, SQLAlchemy, PostgreSQL, and Python.
+- Skills: Java, Python, JavaScript, TypeScript, SQL, React, Next.js, Tailwind CSS, HTML5, CSS3, Node.js, Express.js, FastAPI, REST APIs, MySQL, PostgreSQL, SQLite, Redis, Git, GitHub, VS Code, Postman, Celery, Framer Motion, Vite.
+- Contact: ruchirjain@example.com
 If you don't know something, say so - don't make things up.`;
 
 type ChatRole = 'user' | 'assistant';
@@ -166,6 +170,11 @@ app.post('/api/tts', ttsHandler);
 app.post('/api/chat/tts', ttsHandler);
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`[API] Server is running on http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[API] Server is running on http://localhost:${PORT}`);
+  });
+}
+
+export default app;
+
