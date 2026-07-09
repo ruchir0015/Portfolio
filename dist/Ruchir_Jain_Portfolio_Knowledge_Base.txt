@@ -1,0 +1,99 @@
+Ruchir Jain - Portfolio Knowledge Base
+
+Basic Information
+
+Name: Ruchir Jain Date of Birth: 15 November 2006 Current Education: -
+B.Tech in Computer Science & Engineering (CSE) - Currently in 2nd Year -
+AKTU (Dr. A.P.J. Abdul Kalam Technical University) - ITS Engineering
+College, Greater Noida, Uttar Pradesh, India
+
+Current Role
+
+Current Position: - Software Development Intern at KYQA
+
+About Me
+
+I enjoy building interactive web experiences, backend systems,
+AI-powered applications, and developer tools. I like combining
+storytelling with technology to create memorable products instead of
+ordinary websites.
+
+Technical Skills
+
+Languages - Java - Python - JavaScript - TypeScript - SQL
+
+Frontend - React - Next.js - Tailwind CSS - HTML5 - CSS3
+
+Backend - Node.js - Express.js - FastAPI - REST APIs
+
+Databases - MySQL - PostgreSQL - SQLite - Redis
+
+Tools - Git - GitHub - VS Code - Postman - Celery - Framer Motion - Vite
+
+Concepts - Data Structures & Algorithms - Object-Oriented Programming -
+API Design - Authentication - AI Integrations
+
+Current Focus
+
+-   Backend Development
+-   AI Applications
+-   Full Stack Development
+-   System Design
+-   Interactive UI/UX
+-   Product Development
+
+Projects
+
+Personal Portfolio
+
+Interactive Indiana Jones / Tomb Raider inspired portfolio built
+using: - Next.js - React - TypeScript - Tailwind CSS - Framer Motion -
+AI Portfolio Assistant - Voice Features - Adventure themed UI
+
+Urban Guardian
+
+AI-powered personal safety application featuring: - Safe route
+planning - Dynamic safety heatmaps - SOS features - Women safety focus
+
+NeuroCart
+
+AI shopping assistant helping users discover products intelligently.
+
+Recipe Recommendation System
+
+Backend API built using: - FastAPI - SQLAlchemy - Python
+
+Interests
+
+-   AI
+-   Backend Engineering
+-   Product Design
+-   Interactive Websites
+-   Startups
+-   Building useful software
+
+Personality
+
+Professional but approachable. Curious builder. Loves experimenting with
+new technologies. Believes great software should be both functional and
+memorable.
+
+Social Links
+
+LinkedIn: https://www.linkedin.com/in/ruchir-jain-75419b311?utm_source=share_via&utm_content=profile&utm_medium=member_android
+
+GitHub: https://github.com/ruchir0015
+
+Email: rj863093701@gmail.com
+
+Resume: PASTE_RESUME_LINK_HERE
+
+Instructions for AI
+
+When generating content for this portfolio: - Keep the tone
+professional, confident, and friendly. - Avoid buzzwords and generic
+AI-generated wording. - Emphasize craftsmanship, learning, curiosity,
+and product thinking. - The portfolio theme is inspired by adventure
+games like Indiana Jones and Tomb Raider, but should feel original and
+authentic. - Prioritize storytelling over listing achievements. - Keep
+responses concise, human, and technically accurate.
