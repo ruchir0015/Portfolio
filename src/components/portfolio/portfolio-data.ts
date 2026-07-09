@@ -157,8 +157,8 @@ export const portfolioData = {
     achievements: [
       {
         title: "Intern",
-        value: "KYQA",
-        description: "Software Development Intern contributing to backend development and AI integrations.",
+        value: "Privault",
+        description: "Software Development Intern contributing to front-end development, scroll-driven 3D animations and design systems using React, TypeScript, Three.js & GSAP.",
       },
       {
         title: "Active",
@@ -195,13 +195,13 @@ export const portfolioData = {
         y: 70,
       },
       {
-        id: "kyqa",
-        company: "KYQA",
+        id: "privault",
+        company: "Privault",
         role: "Software Development Intern",
         years: "2026 — Present",
         description:
-          "Working on backend APIs, system designs, and software QA pipelines. Gaining hands-on industry experience building scalable systems and integrating AI technologies.",
-        stack: ["TypeScript", "Node.js", "FastAPI", "REST APIs"],
+          "Contributing to front-end development on an AI-powered data privacy and compliance platform. Built and debugged scroll-driven 3D animations, and contributed to the product's design system and reusable component library.",
+        stack: ["React", "TypeScript", "Vite", "Three.js", "GSAP", "Tailwind CSS"],
         badge: "19",
         x: 75,
         y: 30,
@@ -272,7 +272,7 @@ export const portfolioData = {
       },
       {
         title: "Email",
-        href: "https://mail.google.com/mail/?view=cm&fs=1&to=ruchirjain@example.com&su=Portfolio%20Inquiry",
+        href: "https://mail.google.com/mail/?view=cm&fs=1&to=rj863093701@gmail.com&su=Portfolio%20Inquiry",
         label: "Message",
         description: "Send a raven. Launch a direct transmission.",
       },

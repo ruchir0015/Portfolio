@@ -82,10 +82,10 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
         {/* ── Timeline container ── */}
         <div className="relative mt-16">
 
-          {/* ── Vertical center line ── */}
+          {/* Vertical line: left-edge on mobile, centered on sm+ */}
           <div
             ref={lineRef}
-            className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+            className="absolute top-0 bottom-0 w-px left-5 sm:left-1/2 sm:-translate-x-1/2"
             style={{ background: "rgba(139,110,71,0.18)" }}
           >
             {/* Ink trail that grows with scroll */}
@@ -100,19 +100,19 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
             />
           </div>
 
-          {/* ── Ship marker ── */}
+          {/* Ship: follows left line on mobile, center on sm+ */}
           <div
             ref={shipRef}
-            className="pointer-events-none absolute left-1/2 top-0 z-20 drop-shadow-[0_4px_14px_rgba(76,52,24,0.35)]"
+            className="pointer-events-none absolute z-20 top-0 left-5 sm:left-1/2"
             style={{ transform: "translateX(-50%) translateY(0px)" }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-[#8D6E42]/60 bg-[#FDF9ED] shadow-lg">
+            <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full border-2 border-[#8D6E42]/60 bg-[#FDF9ED] shadow-lg">
               <ShipIcon />
             </div>
           </div>
 
-          {/* ── Stop cards ── */}
-          <div className="flex flex-col gap-16 pb-8 pt-4">
+          {/* ── Cards ── */}
+          <div className="flex flex-col gap-8 sm:gap-16 pb-8 pt-4">
             {sortedStops.map((stop, index) => {
               const isCurrent = stop.years.toLowerCase().includes("present");
               const isLeft = index % 2 === 0;
@@ -120,38 +120,31 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
               return (
                 <motion.div
                   key={stop.id}
-                  initial={{ opacity: 0, x: isLeft ? -32 : 32 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, ease: "easeOut" }}
-                  viewport={{ once: true, margin: "-80px" }}
-                  className={`relative flex items-center gap-0 ${
-                    isLeft ? "flex-row" : "flex-row-reverse"
-                  }`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  className={`relative flex items-start
+                    pl-14 sm:pl-0
+                    ${isLeft ? "sm:flex-row" : "sm:flex-row-reverse"}
+                  `}
                 >
-                  {/* Card — takes up ~44% width, leaving center gap for line */}
-                  <div className="w-[44%]">
+                  {/* Card: full-width on mobile, 44% on sm+ */}
+                  <div className="w-full sm:w-[44%]">
                     <article
-                      className={`rounded-3xl border bg-[#FDF9ED]/95 p-6 shadow-[0_8px_32px_rgba(76,52,24,0.08)] transition-shadow duration-300 hover:shadow-[0_16px_48px_rgba(76,52,24,0.14)] ${
-                        isCurrent
-                          ? "border-[#1A7A6D]/40"
-                          : "border-black/10"
-                      }`}
+                      className={`rounded-3xl border bg-[#FDF9ED]/95 p-5 sm:p-6
+                        shadow-[0_8px_32px_rgba(76,52,24,0.08)]
+                        hover:shadow-[0_16px_48px_rgba(76,52,24,0.14)]
+                        transition-shadow duration-300
+                        ${isCurrent ? "border-[#1A7A6D]/40" : "border-black/10"}`}
                     >
-                      {/* Top row */}
-                      <div className="flex items-start justify-between gap-3">
-                        <div className="flex items-center gap-3">
-                          {/* Avatar */}
-                          <div
-                            className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl text-lg font-bold font-display ${
-                              isCurrent
-                                ? "bg-[#1A7A6D] text-white"
-                                : "bg-[#5C4A3A] text-[#FFF8F0]"
-                            }`}
-                          >
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-base font-bold font-display ${isCurrent ? "bg-[#1A7A6D] text-white" : "bg-[#5C4A3A] text-[#FFF8F0]"}`}>
                             {stop.company.charAt(0)}
                           </div>
-                          <div>
-                            <h3 className="font-display font-bold text-[#3A2A1A] leading-tight text-base">
+                          <div className="min-w-0">
+                            <h3 className="font-display font-bold text-[#3A2A1A] leading-tight text-sm sm:text-base">
                               {stop.company}
                             </h3>
                             <p className="text-xs text-[#5C4A3A]/70 font-semibold mt-0.5">
@@ -159,41 +152,27 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                             </p>
                           </div>
                         </div>
-
-                        {/* Level badge */}
-                        <span className="shrink-0 rounded-lg border border-amber-500/25 bg-amber-400/10 px-2.5 py-1 text-xs font-bold font-mono text-amber-950">
-                          Lv. {stop.badge}
+                        <span className="shrink-0 rounded-lg border border-amber-500/25 bg-amber-400/10 px-2 py-1 text-xs font-bold font-mono text-amber-950">
+                          Lv.{stop.badge}
                         </span>
                       </div>
 
-                      {/* Status + years */}
-                      <div className="mt-3 flex items-center gap-2">
-                        <span
-                          className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold tracking-widest font-mono uppercase ${
-                            isCurrent
-                              ? "bg-emerald-100 text-emerald-700 border border-emerald-200"
-                              : "bg-amber-100 text-amber-800 border border-amber-200"
-                          }`}
-                        >
+                      <div className="mt-3 flex items-center gap-2 flex-wrap">
+                        <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold tracking-widest font-mono uppercase ${isCurrent ? "bg-emerald-100 text-emerald-700 border border-emerald-200" : "bg-amber-100 text-amber-800 border border-amber-200"}`}>
                           {isCurrent ? "⚔ Active" : "✓ Done"}
                         </span>
-                        <span className="text-[11px] text-[#5C4A3A]/50 font-mono tracking-wider">
+                        <span className="text-[11px] text-[#5C4A3A]/50 font-mono">
                           {stop.years}
                         </span>
                       </div>
 
-                      {/* Description */}
                       <p className="mt-4 text-sm leading-7 text-[#3A2A1A]/65 border-t border-black/5 pt-4">
                         {stop.description}
                       </p>
 
-                      {/* Stack tags */}
                       <div className="mt-4 flex flex-wrap gap-1.5">
                         {stop.stack.map((item) => (
-                          <span
-                            key={item}
-                            className="rounded-full border border-amber-900/10 bg-amber-950/[0.04] px-3 py-1 text-xs font-mono text-[#5C4A3A]"
-                          >
+                          <span key={item} className="rounded-full border border-amber-900/10 bg-amber-950/[0.04] px-3 py-1 text-xs font-mono text-[#5C4A3A]">
                             {item}
                           </span>
                         ))}
@@ -201,47 +180,39 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                     </article>
                   </div>
 
-                  {/* Center connector dot */}
-                  <div className="relative z-10 flex w-[12%] shrink-0 justify-center">
-                    <div
-                      className={`h-4 w-4 rounded-full border-2 shadow-md ${
-                        isCurrent
-                          ? "border-[#1A7A6D] bg-[#1A7A6D]"
-                          : "border-[#8D6E42] bg-[#FDF9ED]"
-                      }`}
-                    >
-                      {isCurrent && (
-                        <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-40" />
-                      )}
+                  {/* Connector dot */}
+                  {/* Mobile: absolute over left line. sm+: in 12% center gap */}
+                  <div className="absolute left-5 top-5 z-10 -translate-x-1/2
+                    sm:relative sm:left-auto sm:top-auto sm:translate-x-0
+                    sm:flex sm:w-[12%] sm:shrink-0 sm:justify-center sm:items-center sm:self-center">
+                    <div className={`h-3.5 w-3.5 rounded-full border-2 shadow-md ${isCurrent ? "border-[#1A7A6D] bg-[#1A7A6D]" : "border-[#8D6E42] bg-[#FDF9ED]"}`}>
+                      {isCurrent && <span className="absolute inset-0 animate-ping rounded-full bg-emerald-400 opacity-40" />}
                     </div>
                   </div>
 
-                  {/* Empty right half */}
-                  <div className="w-[44%]" />
+                  {/* Empty opposite side — desktop only */}
+                  <div className="hidden sm:block sm:w-[44%]" />
                 </motion.div>
               );
             })}
 
-            {/* ── "What's next?" terminal node ── */}
+            {/* What's next */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              transition={{ duration: 0.45, ease: "easeOut" }}
               viewport={{ once: true, margin: "-60px" }}
-              className="relative flex justify-center"
+              className="relative flex pl-14 sm:pl-0 sm:justify-center"
             >
-              {/* Center dot */}
-              <div className="absolute left-1/2 top-1/2 z-10 flex h-5 w-5 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-dashed border-[#8D6E42]/50 bg-[#FDF9ED]">
+              <div className="absolute left-5 top-1/2 -translate-x-1/2 -translate-y-1/2
+                sm:left-1/2
+                z-10 flex h-5 w-5 items-center justify-center rounded-full
+                border-2 border-dashed border-[#8D6E42]/50 bg-[#FDF9ED]">
                 <span className="text-[10px] font-bold text-[#5C4A3A]">?</span>
               </div>
-
-              <div className="rounded-2xl border border-dashed border-[#8D6E42]/30 bg-[#FDF9ED]/60 px-8 py-4 text-center">
-                <p className="font-display font-bold text-[#5C4A3A]/60 text-sm">
-                  What's next?
-                </p>
-                <p className="mt-1 text-xs text-[#5C4A3A]/40 font-mono">
-                  The map has not been drawn yet — this story continues…
-                </p>
+              <div className="w-full sm:w-auto rounded-2xl border border-dashed border-[#8D6E42]/30 bg-[#FDF9ED]/60 px-6 sm:px-8 py-4 text-center">
+                <p className="font-display font-bold text-[#5C4A3A]/60 text-sm">What's next?</p>
+                <p className="mt-1 text-xs text-[#5C4A3A]/40 font-mono">The map has not been drawn yet — this story continues…</p>
               </div>
             </motion.div>
           </div>
