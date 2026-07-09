@@ -3,6 +3,7 @@ const ACCENT_COLORS: Record<string, [string, string]> = {
   "from-rose-300/70 to-fuchsia-500/70": ["#fda4af", "#d946ef"],
   "from-sky-300/70 to-cyan-500/70": ["#7dd3fc", "#06b6d4"],
   "from-emerald-300/70 to-teal-500/70": ["#6ee7b7", "#14b8a6"],
+  "from-blue-300/70 to-indigo-500/70": ["#93c5fd", "#6366f1"],
 };
 
 export function projectAccentImage(accent: string): string {

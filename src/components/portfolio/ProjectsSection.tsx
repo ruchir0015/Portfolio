@@ -15,7 +15,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
     () =>
       projects.items.map((project) => ({
         image: projectAccentImage(project.accent),
-        link: "#",
+        link: project.link,
         title: project.title,
         description: project.summary,
         stack: project.stack,

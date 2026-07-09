@@ -61,6 +61,7 @@ export interface ProjectItem {
   status: string;
   stack: string[];
   accent: string;
+  link: string;
 }
 
 export interface ProjectsData {
@@ -220,6 +221,16 @@ export const portfolioData = {
         status: "Equipped",
         stack: ["React", "Vite", "TypeScript", "Tailwind CSS", "Framer Motion"],
         accent: "from-amber-300/70 to-orange-500/70",
+        link: "https://portfolio-git-main-ruchir15.vercel.app",
+      },
+      {
+        title: "Privault",
+        summary:
+          "AI-powered data privacy and compliance platform where I contribute to front-end development using React, TypeScript, Vite, Tailwind CSS, Three.js, and GSAP. Built and debugged scroll-driven 3D animations and contributed to the product's design system and reusable component library.",
+        status: "Mythic",
+        stack: ["React", "TypeScript", "Vite", "Three.js", "GSAP"],
+        accent: "from-blue-300/70 to-indigo-500/70",
+        link: "https://privault-theta.vercel.app/",
       },
       {
         title: "Urban Guardian",
@@ -228,6 +239,7 @@ export const portfolioData = {
         status: "Legendary",
         stack: ["AI Heatmaps", "React", "FastAPI", "API Design"],
         accent: "from-rose-300/70 to-fuchsia-500/70",
+        link: "https://github.com/ruchir0015/Urban-Guardian",
       },
       {
         title: "NeuroCart",
@@ -236,6 +248,7 @@ export const portfolioData = {
         status: "Epic",
         stack: ["React", "Node.js", "AI Integrations", "Database"],
         accent: "from-sky-300/70 to-cyan-500/70",
+        link: "https://github.com/ruchir0015",
       },
       {
         title: "Recipe Recommendation",
@@ -244,6 +257,7 @@ export const portfolioData = {
         status: "Rare",
         stack: ["FastAPI", "SQLAlchemy", "Python", "PostgreSQL"],
         accent: "from-emerald-300/70 to-teal-500/70",
+        link: "https://github.com/ruchir0015",
       },
     ],
   } satisfies ProjectsData,
