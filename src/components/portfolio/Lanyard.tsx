@@ -89,18 +89,18 @@ function MobileLanyard({
 
       {/* Lanyard Strap Loop SVG - stitched leather style matching Indiana Jones theme */}
       <svg
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[140px] h-[200px] pointer-events-none z-0 opacity-85"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[280px] h-[200px] pointer-events-none z-0 opacity-85"
         viewBox="0 0 100 100"
         fill="none"
       >
         <path
-          d="M 50 0 C 15 20, 20 80, 50 100 C 80 80, 85 20, 50 0"
+          d="M 10 0 C 15 40, 35 90, 50 100 C 65 90, 85 40, 90 0"
           stroke="#1c1a17"
           strokeWidth="4"
           strokeLinecap="round"
         />
         <path
-          d="M 50 0 C 15 20, 20 80, 50 100 C 80 80, 85 20, 50 0"
+          d="M 10 0 C 15 40, 35 90, 50 100 C 65 90, 85 40, 90 0"
           stroke="#ff8236"
           strokeWidth="0.8"
           strokeDasharray="3 2"
