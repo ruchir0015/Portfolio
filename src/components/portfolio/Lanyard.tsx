@@ -52,6 +52,156 @@ interface LanyardProps {
   lanyardWidth?: number;
 }
 
+interface MobileLanyardProps {
+  frontImage: string | null;
+  backImage: string | null;
+  isFlipped: boolean;
+  setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>;
+  lanyardImage?: string | null;
+  imageFit?: 'cover' | 'contain';
+}
+
+function MobileLanyard({
+  frontImage,
+  backImage,
+  isFlipped,
+  setIsFlipped,
+  lanyardImage,
+  imageFit = 'cover'
+}: MobileLanyardProps) {
+  return (
+    <div className="relative w-full h-[600px] flex flex-col items-center select-none overflow-hidden">
+      {/* Floating animation keyframes and styles injected locally */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes lanyard-float {
+          0%, 100% {
+            transform: translate(-50%, 0) rotate(0deg);
+          }
+          50% {
+            transform: translate(-50%, 6px) rotate(0.8deg);
+          }
+        }
+        .animate-lanyard-float {
+          animation: lanyard-float 6s ease-in-out infinite;
+          transform-origin: top center;
+        }
+      `}} />
+
+      {/* Lanyard Strap Loop SVG - stitched leather style matching Indiana Jones theme */}
+      <svg
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[140px] h-[200px] pointer-events-none z-0 opacity-85"
+        viewBox="0 0 100 100"
+        fill="none"
+      >
+        <path
+          d="M 50 0 C 15 20, 20 80, 50 100 C 80 80, 85 20, 50 0"
+          stroke="#1c1a17"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+        <path
+          d="M 50 0 C 15 20, 20 80, 50 100 C 80 80, 85 20, 50 0"
+          stroke="#ff8236"
+          strokeWidth="0.8"
+          strokeDasharray="3 2"
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Metal Clamp and Clip */}
+      <div className="absolute top-[188px] left-1/2 -translate-x-1/2 flex flex-col items-center z-10 pointer-events-none">
+        {/* Clamp (metal ring/connector) */}
+        <div 
+          className="w-4 h-3 rounded shadow"
+          style={{
+            background: 'linear-gradient(135deg, #d4d4d8 0%, #52525b 100%)',
+            border: '1px solid rgba(255,255,255,0.2)'
+          }}
+        />
+        {/* Clip holding the card */}
+        <div 
+          className="w-2.5 h-5 bg-zinc-400 rounded shadow -mt-0.5"
+          style={{
+            background: 'linear-gradient(90deg, #71717a 0%, #e4e4e7 50%, #3f3f46 100%)',
+            border: '1px solid rgba(255,255,255,0.1)'
+          }}
+        />
+      </div>
+
+      {/* Floating Card Wrapper */}
+      <div 
+        className="absolute top-[204px] left-1/2 w-[220px] h-[308px] z-10 animate-lanyard-float"
+        style={{ perspective: '1200px' }}
+      >
+        <div 
+          className="w-full h-full cursor-pointer relative"
+          onClick={() => setIsFlipped(!isFlipped)}
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transition: 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)'
+          }}
+        >
+          {/* Card Front Face */}
+          <div
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 flex flex-col"
+            style={{
+              backfaceVisibility: 'hidden',
+              boxShadow: '0 12px 36px rgba(0,0,0,0.6)',
+            }}
+          >
+            {/* Slot hole at the top center */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-6 h-1.5 bg-black border border-white/20 rounded-full z-20" />
+            
+            {frontImage ? (
+              <img
+                src={frontImage}
+                alt="Card Front"
+                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain' : 'object-cover'} select-none pointer-events-none`}
+              />
+            ) : (
+              <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-500 font-mono text-xs">
+                No Front Image
+              </div>
+            )}
+            
+            {/* Soft gloss shine overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-10" />
+          </div>
+
+          {/* Card Back Face */}
+          <div
+            className="absolute inset-0 w-full h-full rounded-2xl overflow-hidden border border-white/10 bg-zinc-950 flex flex-col"
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              boxShadow: '0 12px 36px rgba(0,0,0,0.6)',
+            }}
+          >
+            {/* Slot hole at the top center */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-6 h-1.5 bg-black border border-white/20 rounded-full z-20" />
+            
+            {backImage ? (
+              <img
+                src={backImage}
+                alt="Card Back"
+                className={`w-full h-full ${imageFit === 'contain' ? 'object-contain' : 'object-cover'} select-none pointer-events-none`}
+              />
+            ) : (
+              <div className="w-full h-full bg-zinc-900 flex items-center justify-center text-zinc-500 font-mono text-xs">
+                No Back Image
+              </div>
+            )}
+            
+            {/* Soft gloss shine overlay */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-10" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
@@ -74,55 +224,66 @@ export default function Lanyard({
 
   return (
     <div className="relative z-0 w-full h-[600px] md:h-[700px] xl:h-[750px] flex justify-center items-center transform scale-100 origin-center">
-      <Canvas
-        camera={{ position, fov }}
-        dpr={[1, isMobile ? 1.5 : 2]}
-        gl={{ alpha: transparent }}
-        onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
-      >
-        <ambientLight intensity={1.2} />
-        <Physics gravity={gravity} timeStep={isMobile ? 1 / 30 : 1 / 60}>
-          <Band
-            isMobile={isMobile}
-            frontImage={frontImage}
-            backImage={backImage}
-            imageFit={imageFit}
-            lanyardImage={lanyardImage}
-            lanyardWidth={lanyardWidth}
-            isFlipped={isFlipped}
-          />
-        </Physics>
-        <Environment blur={0.75}>
-          <Lightformer
-            intensity={1.5}
-            color="white"
-            position={[0, -1, 5]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={1.5}
-            color="white"
-            position={[-1, -1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={1.5}
-            color="white"
-            position={[1, 1, 1]}
-            rotation={[0, 0, Math.PI / 3]}
-            scale={[100, 0.1, 1]}
-          />
-          <Lightformer
-            intensity={4}
-            color="white"
-            position={[-10, 0, 14]}
-            rotation={[0, Math.PI / 2, Math.PI / 3]}
-            scale={[100, 10, 1]}
-          />
-        </Environment>
-      </Canvas>
+      {isMobile ? (
+        <MobileLanyard
+          frontImage={frontImage}
+          backImage={backImage}
+          isFlipped={isFlipped}
+          setIsFlipped={setIsFlipped}
+          lanyardImage={lanyardImage}
+          imageFit={imageFit}
+        />
+      ) : (
+        <Canvas
+          camera={{ position, fov }}
+          dpr={[1, 2]}
+          gl={{ alpha: transparent }}
+          onCreated={({ gl }) => gl.setClearColor(new THREE.Color(0x000000), transparent ? 0 : 1)}
+        >
+          <ambientLight intensity={1.2} />
+          <Physics gravity={gravity} timeStep={1 / 60}>
+            <Band
+              isMobile={false}
+              frontImage={frontImage}
+              backImage={backImage}
+              imageFit={imageFit}
+              lanyardImage={lanyardImage}
+              lanyardWidth={lanyardWidth}
+              isFlipped={isFlipped}
+            />
+          </Physics>
+          <Environment blur={0.75}>
+            <Lightformer
+              intensity={1.5}
+              color="white"
+              position={[0, -1, 5]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={1.5}
+              color="white"
+              position={[-1, -1, 1]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={1.5}
+              color="white"
+              position={[1, 1, 1]}
+              rotation={[0, 0, Math.PI / 3]}
+              scale={[100, 0.1, 1]}
+            />
+            <Lightformer
+              intensity={4}
+              color="white"
+              position={[-10, 0, 14]}
+              rotation={[0, Math.PI / 2, Math.PI / 3]}
+              scale={[100, 10, 1]}
+            />
+          </Environment>
+        </Canvas>
+      )}
 
       {/* Floating Flip Button overlay */}
       <button
