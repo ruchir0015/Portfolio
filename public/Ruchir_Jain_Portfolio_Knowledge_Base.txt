@@ -3,13 +3,13 @@ Ruchir Jain - Portfolio Knowledge Base
 Basic Information
 
 Name: Ruchir Jain Date of Birth: 15 November 2006 Current Education: -
-B.Tech in Computer Science & Engineering (CSE) - Currently in 2nd Year -
-AKTU (Dr. A.P.J. Abdul Kalam Technical University) - ITS Engineering
+B.Tech in Computer Science & Engineering (CSE) - Currently in 2nd Year (2024 – 2028) -
+AKTU (Dr. A.P.J. Abdul Kalam Technical University) - ITS Engineering
 College, Greater Noida, Uttar Pradesh, India
 
 Current Role
 
-Current Position: - Software Development Intern at KYQA
+Current Position: - Software Development Intern at Privault.AI
 
 About Me
 
@@ -20,18 +20,20 @@ ordinary websites.
 
 Technical Skills
 
-Languages - Java - Python - JavaScript - TypeScript - SQL
+Languages - C - Java - Python - JavaScript - TypeScript - Dart - SQL
 
-Frontend - React - Next.js - Tailwind CSS - HTML5 - CSS3
+Frontend - React - Next.js - Flutter - Tailwind CSS - HTML5 - CSS3
 
-Backend - Node.js - Express.js - FastAPI - REST APIs
+Backend - FastAPI - Flask - Node.js - Express.js - REST APIs - SQLAlchemy
 
-Databases - MySQL - PostgreSQL - SQLite - Redis
+AI / ML - PyTorch - YOLOv8 - OpenCV - LSTM
 
-Tools - Git - GitHub - VS Code - Postman - Celery - Framer Motion - Vite
+Databases - MySQL - PostgreSQL - SQLite - MongoDB - Supabase - Redis
+
+Tools - Git - GitHub - Docker - AWS - VS Code - Postman - Celery - Framer Motion - Vite - WebRTC
 
 Concepts - Data Structures & Algorithms - Object-Oriented Programming -
-API Design - Authentication - AI Integrations
+API Design - Authentication - AI Integrations - System Design
 
 Current Focus
 
@@ -44,16 +46,40 @@ Current Focus
 
 Projects
 
+Pravaah AI – Crowd & Traffic Command Platform
+
+Real-time crowd & traffic management command platform built for TechTrix hackathon.
+Converts multi-camera video and venue floorplans into live green/yellow/red density
+heatmaps using YOLOv8 and OpenCV, forecasts zone congestion 3–5 cycles ahead via
+a 2-layer PyTorch LSTM, and delivers graph-based rerouting with Telegram alerts to
+field teams and a mobile attendee QR web app.
+Built using: Python, PyTorch, YOLOv8, OpenCV, Flask, React.
+Repo: https://github.com/ruchir0015/PravaahAI
+
+Listen Together
+
+A private, real-time synchronized music experience designed for two people to
+listen, share, and vibe together wherever they are.
+Built using: Flutter, Dart, Supabase Realtime, WebRTC Data Channels, just_audio.
+Repo: https://github.com/ruchir0015/Listen-Together
+
 Personal Portfolio
 
 Interactive Indiana Jones / Tomb Raider inspired portfolio built
-using: - Next.js - React - TypeScript - Tailwind CSS - Framer Motion -
+using: React - Vite - TypeScript - Tailwind CSS - Framer Motion -
 AI Portfolio Assistant - Voice Features - Adventure themed UI
+
+Privault
+
+AI-powered data privacy and compliance platform. Built and debugged
+scroll-driven 3D animations and contributed to the design system component library.
+Built using: React, TypeScript, Vite, Tailwind CSS, Three.js, GSAP.
 
 Urban Guardian
 
-AI-powered personal safety application featuring: - Safe route
-planning - Dynamic safety heatmaps - SOS features - Women safety focus
+AI-powered personal safety application featuring: Safe route
+planning - Dynamic safety heatmaps - SOS features - Women safety focus.
+Built using: React, Node.js, FastAPI, Google Maps API.
 
 NeuroCart
 
@@ -61,11 +87,11 @@ AI shopping assistant helping users discover products intelligently.
 
 Recipe Recommendation System
 
-Backend API built using: - FastAPI - SQLAlchemy - Python
+Backend API built using: FastAPI - SQLAlchemy - Python - PostgreSQL / SQLite
 
 Interests
 
--   AI
+-   AI & Computer Vision
 -   Backend Engineering
 -   Product Design
 -   Interactive Websites
@@ -86,7 +112,7 @@ GitHub: https://github.com/ruchir0015
 
 Email: rj863093701@gmail.com
 
-Resume: PASTE_RESUME_LINK_HERE
+Resume: /Ruchir_Jain-Resume.pdf
 
 Instructions for AI
 

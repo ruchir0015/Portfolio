@@ -223,7 +223,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Resume */}
                   <a
-                    href="/final_Ruchir_resume.pdf"
+                    href="/Ruchir_Jain-Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-semibold tracking-[0.14em] uppercase transition-all duration-200 hover:-translate-y-0.5 hover:brightness-105"

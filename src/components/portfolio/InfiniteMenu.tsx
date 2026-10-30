@@ -668,7 +668,7 @@ class InfiniteGridMenu {
     private discGeo!: DiscGeometry;
     private worldMatrix = mat4.create();
     private tex: WebGLTexture | null = null;
-    private control!: ArcballControl;
+    public control!: ArcballControl;
 
     private discLocations!: {
         aModelPosition: number;

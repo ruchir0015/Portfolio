@@ -107,7 +107,7 @@ export const portfolioData = {
     codename: "BUILDER",
     currentQuest: "🎓 B.Tech CSE (2nd Year) — ITS Engineering College",
     summary:
-      "Hi, I'm Ruchir Jain, a B.Tech Computer Science & Engineering student at ITS Engineering College (AKTU) and a Software Development Intern at KYQA. I enjoy building interactive web experiences, backend systems, AI-powered applications, and developer tools. I like combining storytelling with technology to create memorable products instead of ordinary websites.",
+      "Hi, I'm Ruchir Jain, a B.Tech Computer Science & Engineering student at ITS Engineering College (AKTU) and a Software Development Intern at Privault. I enjoy building interactive web experiences, backend systems, AI-powered applications, and developer tools. I like combining storytelling with technology to create memorable products instead of ordinary websites.",
     detail:
       "Curious builder · Loves experimenting with new technologies · Believes software should be both functional and memorable.",
     stats: [
@@ -133,20 +133,32 @@ export const portfolioData = {
       "Python",
       "JavaScript",
       "TypeScript",
+      "C",
       "SQL",
       "React",
       "Next.js",
+      "Flutter",
+      "Dart",
       "Tailwind CSS",
       "HTML5",
       "CSS3",
       "Node.js",
       "Express.js",
       "FastAPI",
+      "Flask",
+      "PyTorch",
+      "YOLOv8",
+      "OpenCV",
+      "WebRTC",
       "REST APIs",
       "MySQL",
       "PostgreSQL",
+      "MongoDB",
       "SQLite",
+      "Supabase",
       "Redis",
+      "Docker",
+      "AWS",
       "Git",
       "GitHub",
       "VS Code",
@@ -158,7 +170,7 @@ export const portfolioData = {
     achievements: [
       {
         title: "Intern",
-        value: "Privault",
+        value: "Privault.AI",
         description: "Software Development Intern contributing to front-end development, scroll-driven 3D animations and design systems using React, TypeScript, Three.js & GSAP.",
       },
       {
@@ -168,13 +180,13 @@ export const portfolioData = {
       },
       {
         title: "Builder",
-        value: "Urban Guardian Safety App",
-        description: "Developed AI safety app features with SOS tools and women-centric safety heatmaps.",
+        value: "Pravaah AI Platform",
+        description: "AI-integrated crowd and traffic command platform with live density heatmaps, LSTM forecasting, and real-time rerouting.",
       },
       {
         title: "Innovator",
-        value: "NeuroCart Product Assistant",
-        description: "Built a conversational AI assistant to intelligently discover products.",
+        value: "Listen Together & Safety Apps",
+        description: "Built peer-to-peer real-time music sync with WebRTC/Supabase and AI safety apps with SOS & dynamic heatmaps.",
       },
     ],
   } satisfies AboutData,
@@ -224,6 +236,24 @@ export const portfolioData = {
         link: "https://portfolio-git-main-ruchir15.vercel.app",
       },
       {
+        title: "Pravaah AI",
+        summary:
+          "Real-time crowd & traffic management command platform (TechTrix). Converts multi-camera video and venue floorplans into live green/yellow/red density heatmaps with YOLOv8 & OpenCV, forecasts congestion 3–5 cycles ahead via a 2-layer PyTorch LSTM, and delivers graph-based rerouting with Telegram field alerts and attendee QR apps.",
+        status: "Mythic",
+        stack: ["Python", "PyTorch", "YOLOv8", "OpenCV", "Flask", "React"],
+        accent: "from-purple-400/70 to-indigo-600/70",
+        link: "https://github.com/ruchir0015/PravaahAI",
+      },
+      {
+        title: "Listen Together",
+        summary:
+          "Private, real-time synchronized music experience designed for two people to listen, share, and vibe together anywhere. Powered by WebRTC Data Channels for direct peer-to-peer audio streaming, Supabase Realtime for instant playback synchronization, and an offline audio cache.",
+        status: "Legendary",
+        stack: ["Flutter", "Dart", "Supabase", "WebRTC", "just_audio"],
+        accent: "from-pink-400/70 to-rose-500/70",
+        link: "https://github.com/ruchir0015/Listen-Together",
+      },
+      {
         title: "Privault",
         summary:
           "AI-powered data privacy and compliance platform where I contribute to front-end development using React, TypeScript, Vite, Tailwind CSS, Three.js, and GSAP. Built and debugged scroll-driven 3D animations and contributed to the product's design system and reusable component library.",
@@ -268,7 +298,7 @@ export const portfolioData = {
     links: [
       {
         title: "Resume",
-        href: "/final_Ruchir_resume.pdf",
+        href: "/Ruchir_Jain-Resume.pdf",
         label: "Loot",
         description: "Full adventure log. Grab the record of prior campaigns.",
       },
