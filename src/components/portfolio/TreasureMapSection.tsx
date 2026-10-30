@@ -85,7 +85,7 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
           {/* Vertical line: left-edge on mobile, centered on sm+ */}
           <div
             ref={lineRef}
-            className="absolute top-0 bottom-0 w-px left-5 sm:left-1/2 sm:-translate-x-1/2"
+            className="absolute top-0 bottom-7 w-px left-5 sm:left-1/2 sm:-translate-x-1/2"
             style={{ background: "rgba(139,110,71,0.18)" }}
           >
             {/* Ink trail that grows with scroll */}
@@ -112,7 +112,7 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
           </div>
 
           {/* ── Cards ── */}
-          <div className="flex flex-col gap-8 sm:gap-16 pb-8 pt-4">
+          <div className="flex flex-col gap-8 sm:gap-16 pt-4 pb-4">
             {sortedStops.map((stop, index) => {
               const isCurrent = stop.years.toLowerCase().includes("present");
               const isLeft = index % 2 === 0;
@@ -152,9 +152,6 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
                             </p>
                           </div>
                         </div>
-                        <span className="shrink-0 rounded-lg border border-amber-500/25 bg-amber-400/10 px-2 py-1 text-xs font-bold font-mono text-amber-950">
-                          Lv.{stop.badge}
-                        </span>
                       </div>
 
                       <div className="mt-3 flex items-center gap-2 flex-wrap">
@@ -196,28 +193,30 @@ export function TreasureMapSection({ experience }: TreasureMapSectionProps) {
               );
             })}
 
-            {/* What's next */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              viewport={{ once: true, margin: "-60px" }}
-              className="relative flex pl-14 sm:pl-0 sm:justify-center"
-            >
-              <div className="absolute left-5 top-1/2 -translate-x-1/2 -translate-y-1/2
-                sm:left-1/2
-                z-10 flex h-5 w-5 items-center justify-center rounded-full
-                border-2 border-dashed border-[#8D6E42]/50 bg-[#FDF9ED]">
-                <span className="text-[10px] font-bold text-[#5C4A3A]">?</span>
+            {/* Destination anchor pin - ship docks cleanly here */}
+            <div className="relative flex items-center justify-start pl-14 sm:pl-0 sm:justify-center pt-2">
+              <div className="absolute left-5 -translate-x-1/2 sm:static sm:translate-x-0 z-10 flex h-7 w-7 items-center justify-center rounded-full border-2 border-dashed border-[#8D6E42]/70 bg-[#FDF9ED] shadow-sm">
+                <span className="text-xs font-bold text-[#5C4A3A]">?</span>
               </div>
-              <div className="w-full sm:w-auto rounded-2xl border border-dashed border-[#8D6E42]/30 bg-[#FDF9ED]/60 px-6 sm:px-8 py-4 text-center">
-                <p className="font-display font-bold text-[#5C4A3A]/60 text-sm">What's next?</p>
-                <p className="mt-1 text-xs text-[#5C4A3A]/40 font-mono">The map has not been drawn yet — this story continues…</p>
-              </div>
-            </motion.div>
+            </div>
           </div>
 
         </div>
+
+        {/* ── What's next card: positioned safely below the voyage route ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          viewport={{ once: true, margin: "-60px" }}
+          className="mt-6 flex justify-center"
+        >
+          <div className="w-full sm:w-auto max-w-lg rounded-2xl border border-dashed border-[#8D6E42]/40 bg-[#FDF9ED] px-8 py-5 text-center shadow-[0_4px_20px_rgba(76,52,24,0.06)]">
+            <p className="font-display font-bold text-[#3A2A1A] text-sm sm:text-base">What's next?</p>
+            <p className="mt-1 text-xs text-[#5C4A3A]/70 font-mono">The map has not been drawn yet — this story continues…</p>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

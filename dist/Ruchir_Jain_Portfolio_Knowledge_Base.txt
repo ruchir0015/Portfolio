@@ -81,10 +81,6 @@ AI-powered personal safety application featuring: Safe route
 planning - Dynamic safety heatmaps - SOS features - Women safety focus.
 Built using: React, Node.js, FastAPI, Google Maps API.
 
-NeuroCart
-
-AI shopping assistant helping users discover products intelligently.
-
 Recipe Recommendation System
 
 Backend API built using: FastAPI - SQLAlchemy - Python - PostgreSQL / SQLite

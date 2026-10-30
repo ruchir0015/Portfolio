@@ -272,15 +272,6 @@ export const portfolioData = {
         link: "https://github.com/ruchir0015/Urban-Guardian",
       },
       {
-        title: "NeuroCart",
-        summary:
-          "AI shopping assistant helping users discover products intelligently.",
-        status: "Epic",
-        stack: ["React", "Node.js", "AI Integrations", "Database"],
-        accent: "from-sky-300/70 to-cyan-500/70",
-        link: "https://github.com/ruchir0015",
-      },
-      {
         title: "Recipe Recommendation",
         summary:
           "Backend API built using: FastAPI, SQLAlchemy, Python.",

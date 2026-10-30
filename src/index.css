@@ -242,3 +242,14 @@ body {
     @apply font-sans;
   }
 }
+
+
+/* Hide navbar toggle and items when chatbot is open */
+body.chatbot-open .navbar-container,
+body.chatbot-open .bubble-menu,
+body.chatbot-open .bubble-menu-items {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}

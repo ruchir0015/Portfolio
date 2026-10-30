@@ -358,9 +358,11 @@ export function PortfolioChatbot() {
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("chatbot-open");
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      document.body.classList.remove("chatbot-open");
     };
   }, [isOpen]);
 
@@ -445,7 +447,7 @@ export function PortfolioChatbot() {
           <>
             <motion.button
               type="button"
-              className="fixed inset-0 z-40 bg-slate-950/40 backdrop-blur-[2px] sm:bg-slate-950/15"
+              className="fixed inset-0 z-[1100] bg-slate-950/40 backdrop-blur-[2px] sm:bg-slate-950/15"
               onClick={() => setIsOpen(false)}
               aria-label="Close chat modal"
               initial={{ opacity: 0 }}
@@ -468,7 +470,7 @@ export function PortfolioChatbot() {
                   : { opacity: 0, y: 18, scale: 0.98 }
               }
               transition={{ duration: 0.22, ease: "easeOut" }}
-              className="fixed inset-x-2 bottom-2 z-50 flex h-[min(600px,calc(100dvh-1rem))] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.94))] shadow-[0_40px_90px_rgba(2,8,23,0.58)] sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[420px]"
+              className="fixed inset-x-2 bottom-2 z-[1110] flex h-[min(600px,calc(100dvh-1rem))] flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(15,23,42,0.96),rgba(2,6,23,0.94))] shadow-[0_40px_90px_rgba(2,8,23,0.58)] sm:inset-x-auto sm:right-6 sm:bottom-24 sm:w-[420px]"
             >
               <div className="border-b border-white/10 bg-[linear-gradient(135deg,rgba(212,184,150,0.2),rgba(141,110,66,0.05))] px-5 py-4">
                 <div className="flex items-start justify-between gap-4">

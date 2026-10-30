@@ -69,11 +69,7 @@ Tools: Git, GitHub, Postman, VS Code, Figma, WebRTC
    Description: AI-powered personal safety app with dynamic safety heatmaps, SOS tools, safe route planning, and women's safety features using Google Maps API.
    Tech: React, Node.js, FastAPI, Google Maps API
 
-6. NeuroCart
-   Description: Conversational AI shopping assistant that helps users discover products intelligently.
-   Tech: React, Node.js, AI Integrations, Database
-
-7. Recipe Recommendation API
+6. Recipe Recommendation API
    Description: Backend API for recipe recommendations with an adaptable SQLAlchemy relational schema.
    Tech: FastAPI, SQLAlchemy, Python, PostgreSQL / SQLite
 

@@ -33,7 +33,6 @@ An inventory of conquered codebases categorized by RPG item rarity:
 * 🎵 **Listen Together** (Legendary) — Real-time P2P Music Sync + Flutter + WebRTC + Supabase
 * 🌌 **Privault** (Mythic) — Compliance Platform + GSAP + 3D
 * 🚨 **Urban Guardian** (Legendary) — AI-powered route safety and SOS heatmap application
-* 🛒 **NeuroCart** (Epic) — AI conversational shopping assistant
 * 🍳 **Recipe Recommendation API** (Rare) — Python + FastAPI + PostgreSQL
 
 ### 5. The Campfire Companion (Conversational AI Chatbot)
