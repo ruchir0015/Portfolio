@@ -116,16 +116,16 @@ export const portfolioData = {
         value: "ITS Engg. College (AKTU)",
       },
       {
-        label: "Class",
-        value: "BUILDER",
+        label: "Degree",
+        value: "B.Tech CSE (2024 – 2028)",
       },
       {
-        label: "Level",
-        value: "Lv. 19",
+        label: "Experience",
+        value: "SWE Intern @ Privault.AI",
       },
       {
         label: "Location",
-        value: "India",
+        value: "Greater Noida, India",
       },
     ],
     skills: [
