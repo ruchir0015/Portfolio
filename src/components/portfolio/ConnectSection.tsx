@@ -84,7 +84,7 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "success" | "notice" | "error">("idle");
   const [statusMessage, setStatusMessage] = useState("");
 
   useEffect(() => {
@@ -128,15 +128,22 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
         throw new Error("Unable to send message directly right now.");
       }
 
-      setStatus("success");
-      setStatusMessage("Your message has been sent successfully! I'll get back to you as soon as possible.");
+      const data = await response.json().catch(() => ({}));
+      if (data.delivered) {
+        setStatus("success");
+        setStatusMessage("Your message has been sent directly to Ruchir's inbox!");
+      } else {
+        setStatus("notice");
+        setStatusMessage("Message recorded! To guarantee instant delivery, click below to open in your mail app:");
+      }
+
       setName("");
       setEmail("");
       setSubject("");
       setMessage("");
     } catch {
       setStatus("error");
-      setStatusMessage("Could not deliver via server. You can also send directly via email.");
+      setStatusMessage("Could not connect to server. You can send directly via your mail app below:");
     } finally {
       setIsSubmitting(false);
     }
@@ -247,193 +254,208 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
             })}
           </div>
 
-          {/* ── RIGHT: PixelCard Contact Input Box ── */}
-          <ScrollReveal
-            direction="left"
-            delay={0.12}
-            className="lg:col-span-7 flex flex-col"
-          >
-            <PixelCard
-              variant="blue"
-              glowColor="#38bdf8"
-              gap={7}
-              pixelSize={2.5}
-              speed={28}
-              spotlight={0.45}
-              glow={0.5}
-              opacity={0.35}
-              fade={0.65}
-              trigger="hover"
-              radius={28}
-              theme="dark"
-              className="h-full w-full border border-white/10 p-7 sm:p-9 shadow-[0_24px_60px_rgba(2,8,23,0.35)] backdrop-blur-md"
+            {/* ── RIGHT: PixelCard Contact Input Box (Black & White) ── */}
+            <ScrollReveal
+              direction="left"
+              delay={0.12}
+              className="lg:col-span-7 flex flex-col"
             >
-              <div className="w-full flex flex-col justify-between h-full select-text">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                    <p className="text-xs uppercase font-mono tracking-widest text-sky-400 font-semibold">
-                      Direct Transmission
+              <PixelCard
+                variant="default"
+                colors={["#ffffff", "#f4f4f5", "#e4e4e7", "#d4d4d8", "#a1a1aa", "#71717a", "#27272a"]}
+                glowColor="#ffffff"
+                gap={9}
+                pixelSize={2.5}
+                speed={24}
+                spotlight={0.35}
+                glow={0.35}
+                opacity={0.55}
+                fade={0.45}
+                trigger="hover"
+                radius={28}
+                theme="dark"
+                noFocus={true}
+                className="h-full w-full border border-white/15 bg-zinc-950/90 p-7 sm:p-9 shadow-[0_24px_60px_rgba(0,0,0,0.85)] backdrop-blur-md"
+              >
+                <div className="w-full flex flex-col justify-between h-full select-text">
+                  <div>
+                    <div className="flex items-center gap-3 mb-2.5">
+                      <span className="inline-flex h-2 w-2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)] animate-pulse" />
+                      <p className="text-xs uppercase font-mono tracking-widest text-zinc-300 font-semibold">
+                        Direct Transmission
+                      </p>
+                    </div>
+                    <h3 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
+                      Get in touch
+                    </h3>
+                    <p className="mt-1.5 text-sm text-zinc-400">
+                      Send a message straight to my inbox for roles, projects, or collaborations.
                     </p>
                   </div>
-                  <h3 className="font-display text-2xl font-bold tracking-tight text-white sm:text-3xl">
-                    Get in touch
-                  </h3>
-                  <p className="mt-1.5 text-sm text-slate-300">
-                    Send a message straight to my inbox for roles, projects, or collaborations.
-                  </p>
-                </div>
 
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  {/* Name & Email */}
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                  <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                    {/* Name & Email */}
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                      <div>
+                        <label
+                          htmlFor="contact-name"
+                          className="block text-xs font-medium uppercase tracking-wider text-zinc-300 mb-1.5 font-mono"
+                        >
+                          Name
+                        </label>
+                        <input
+                          id="contact-name"
+                          type="text"
+                          required
+                          placeholder="Your name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          className="w-full rounded-xl border border-white/15 bg-zinc-900/90 px-4 py-3 text-sm text-white placeholder-zinc-500 shadow-inner focus:border-white focus:outline-none focus:ring-1 focus:ring-white/30 transition"
+                        />
+                      </div>
+
+                      <div>
+                        <label
+                          htmlFor="contact-email"
+                          className="block text-xs font-medium uppercase tracking-wider text-zinc-300 mb-1.5 font-mono"
+                        >
+                          Email
+                        </label>
+                        <input
+                          id="contact-email"
+                          type="email"
+                          required
+                          placeholder="you@example.com"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          className="w-full rounded-xl border border-white/15 bg-zinc-900/90 px-4 py-3 text-sm text-white placeholder-zinc-500 shadow-inner focus:border-white focus:outline-none focus:ring-1 focus:ring-white/30 transition"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Subject */}
                     <div>
                       <label
-                        htmlFor="contact-name"
-                        className="block text-xs font-medium uppercase tracking-wider text-slate-300 mb-1.5 font-mono"
+                        htmlFor="contact-subject"
+                        className="block text-xs font-medium uppercase tracking-wider text-zinc-300 mb-1.5 font-mono"
                       >
-                        Name
+                        Subject
                       </label>
                       <input
-                        id="contact-name"
+                        id="contact-subject"
                         type="text"
-                        required
-                        placeholder="Your name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-[#091122]/70 px-4 py-3 text-sm text-white placeholder-slate-500 shadow-inner focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400 transition"
+                        placeholder="What's this about?"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        className="w-full rounded-xl border border-white/15 bg-zinc-900/90 px-4 py-3 text-sm text-white placeholder-zinc-500 shadow-inner focus:border-white focus:outline-none focus:ring-1 focus:ring-white/30 transition"
                       />
                     </div>
 
+                    {/* Message */}
                     <div>
                       <label
-                        htmlFor="contact-email"
-                        className="block text-xs font-medium uppercase tracking-wider text-slate-300 mb-1.5 font-mono"
+                        htmlFor="contact-message"
+                        className="block text-xs font-medium uppercase tracking-wider text-zinc-300 mb-1.5 font-mono"
                       >
-                        Email
+                        Message
                       </label>
-                      <input
-                        id="contact-email"
-                        type="email"
+                      <textarea
+                        id="contact-message"
                         required
-                        placeholder="you@example.com"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full rounded-xl border border-white/10 bg-[#091122]/70 px-4 py-3 text-sm text-white placeholder-slate-500 shadow-inner focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400 transition"
+                        rows={4}
+                        placeholder="Tell me a bit more..."
+                        value={message}
+                        onChange={(e) => setMessage(e.target.value)}
+                        className="w-full resize-none rounded-xl border border-white/15 bg-zinc-900/90 px-4 py-3 text-sm text-white placeholder-zinc-500 shadow-inner focus:border-white focus:outline-none focus:ring-1 focus:ring-white/30 transition"
                       />
                     </div>
-                  </div>
 
-                  {/* Subject */}
-                  <div>
-                    <label
-                      htmlFor="contact-subject"
-                      className="block text-xs font-medium uppercase tracking-wider text-slate-300 mb-1.5 font-mono"
+                    {/* Submit Button (Black & White) */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-white hover:bg-zinc-200 text-zinc-950 font-bold py-3.5 px-6 shadow-[0_12px_28px_rgba(255,255,255,0.12)] transition-all duration-200 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
                     >
-                      Subject
-                    </label>
-                    <input
-                      id="contact-subject"
-                      type="text"
-                      required
-                      placeholder="What's this about?"
-                      value={subject}
-                      onChange={(e) => setSubject(e.target.value)}
-                      className="w-full rounded-xl border border-white/10 bg-[#091122]/70 px-4 py-3 text-sm text-white placeholder-slate-500 shadow-inner focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400 transition"
-                    />
-                  </div>
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin h-5 w-5 text-zinc-950" viewBox="0 0 24 24" fill="none">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
+                          </svg>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5 text-zinc-950">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                          </svg>
+                          <span>Send Message</span>
+                        </>
+                      )}
+                    </button>
+                  </form>
 
-                  {/* Message */}
-                  <div>
-                    <label
-                      htmlFor="contact-message"
-                      className="block text-xs font-medium uppercase tracking-wider text-slate-300 mb-1.5 font-mono"
-                    >
-                      Message
-                    </label>
-                    <textarea
-                      id="contact-message"
-                      required
-                      rows={4}
-                      placeholder="Tell me a bit more..."
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      className="w-full resize-none rounded-xl border border-white/10 bg-[#091122]/70 px-4 py-3 text-sm text-white placeholder-slate-500 shadow-inner focus:border-sky-400 focus:outline-none focus:ring-1 focus:ring-sky-400 transition"
-                    />
-                  </div>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white font-semibold py-3.5 px-6 shadow-[0_12px_28px_rgba(37,99,235,0.35)] transition-all duration-200 active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
-                        </svg>
-                        <span>Sending...</span>
-                      </>
-                    ) : (
-                      <>
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="h-4.5 w-4.5">
-                          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-                        </svg>
-                        <span>Send Message</span>
-                      </>
-                    )}
-                  </button>
-                </form>
-
-                {/* Status Feedback */}
-                <div className="mt-4">
-                  <AnimatePresence mode="wait">
-                    {status === "success" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center text-sm text-emerald-300"
-                      >
-                        <p className="font-semibold">✓ {statusMessage}</p>
-                        <a
-                          href={mailtoFallbackHref}
-                          className="mt-2 inline-block text-xs underline text-emerald-200/80 hover:text-emerald-100"
+                  {/* Status Feedback */}
+                  <div className="mt-4">
+                    <AnimatePresence mode="wait">
+                      {status === "success" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-3.5 text-center text-sm text-emerald-300"
                         >
-                          Want to open in your default mail app? Click here
-                        </a>
-                      </motion.div>
-                    )}
+                          <p className="font-semibold">✓ {statusMessage}</p>
+                        </motion.div>
+                      )}
 
-                    {status === "error" && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center text-sm text-amber-200"
-                      >
-                        <p>{statusMessage}</p>
-                        <a
-                          href={mailtoFallbackHref}
-                          className="mt-2 inline-block rounded-lg bg-amber-500/20 px-3 py-1.5 text-xs font-semibold text-amber-100 hover:bg-amber-500/30 transition"
+                      {status === "notice" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          className="rounded-xl border border-white/20 bg-zinc-900/90 p-3.5 text-center text-sm text-zinc-200"
                         >
-                          Click here to send via your Mail App
-                        </a>
-                      </motion.div>
-                    )}
+                          <p className="font-medium text-white mb-2.5">{statusMessage}</p>
+                          <a
+                            href={mailtoFallbackHref}
+                            className="inline-flex items-center gap-2 rounded-lg bg-white px-3.5 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition"
+                          >
+                            <svg viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5">
+                              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            Open in Gmail / Mail App
+                          </a>
+                        </motion.div>
+                      )}
 
-                    {status === "idle" && (
-                      <p className="text-center text-xs text-slate-400">
-                        I'll get back to you as soon as possible.
-                      </p>
-                    )}
-                  </AnimatePresence>
+                      {status === "error" && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 6 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0 }}
+                          className="rounded-xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-center text-sm text-amber-200"
+                        >
+                          <p className="mb-2">{statusMessage}</p>
+                          <a
+                            href={mailtoFallbackHref}
+                            className="inline-block rounded-lg bg-white px-3 py-1.5 text-xs font-bold text-zinc-950 hover:bg-zinc-200 transition"
+                          >
+                            Send via Mail App
+                          </a>
+                        </motion.div>
+                      )}
+
+                      {status === "idle" && (
+                        <p className="text-center text-xs text-zinc-400">
+                          I'll get back to you as soon as possible.
+                        </p>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 </div>
-              </div>
-            </PixelCard>
-          </ScrollReveal>
+              </PixelCard>
+            </ScrollReveal>
 
         </div>
       </div>

@@ -6,13 +6,13 @@ const CARD =
   'group relative w-full overflow-hidden rounded-[var(--pixel-card-radius,24px)] isolate outline-none [-webkit-tap-highlight-color:transparent] [&>:not(canvas):not([data-rim])]:relative [&>:not(canvas):not([data-rim])]:z-[1]';
 
 const SURFACE: Record<Tone, string> = {
-  dark: 'bg-[linear-gradient(180deg,#0d1629_0%,#080f1e_100%)] shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6)] focus-visible:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6),0_0_0_3px_rgba(127,127,140,0.45)]',
+  dark: 'bg-[linear-gradient(180deg,#141416_0%,#09090b_100%)] shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6)] focus-visible:shadow-[0_24px_48px_-24px_rgba(0,0,0,0.85),0_8px_18px_-10px_rgba(0,0,0,0.6),0_0_0_3px_rgba(255,255,255,0.25)]',
   light:
     'bg-[linear-gradient(180deg,#ffffff_0%,#f6f6f8_100%)] shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18)] focus-visible:shadow-[0_24px_48px_-26px_rgba(24,24,27,0.32),0_8px_18px_-12px_rgba(24,24,27,0.18),0_0_0_3px_rgba(127,127,140,0.45)]'
 };
 
 const RIM: Record<Tone, string> = {
-  dark: 'pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_0_rgba(255,255,255,0.06)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.16),inset_0_1px_0_rgba(255,255,255,0.06)]',
+  dark: 'pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1),inset_0_1px_0_rgba(255,255,255,0.08)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.22),inset_0_1px_0_rgba(255,255,255,0.1)]',
   light:
     'pointer-events-none absolute inset-0 z-[2] rounded-[inherit] transition-shadow duration-[260ms] shadow-[inset_0_0_0_1px_rgba(24,24,27,0.08),inset_0_1px_0_rgba(255,255,255,1)] group-data-[active]:shadow-[inset_0_0_0_1px_rgba(24,24,27,0.16),inset_0_1px_0_rgba(255,255,255,1)]'
 };
@@ -88,11 +88,14 @@ interface Engine {
 
 const VARIANTS: Record<string, VariantConfig> = {
   default: {
-    gap: 5,
-    speed: 35,
-    colors: { dark: ['#f8fafc', '#f1f5f9', '#cbd5e1'], light: ['#18181b', '#52525b', '#a1a1aa'] },
-    glow: { dark: '#cbd5e1', light: '#71717a' },
-    noFocus: false
+    gap: 8,
+    speed: 30,
+    colors: {
+      dark: ['#ffffff', '#f4f4f5', '#e4e4e7', '#a1a1aa', '#71717a', '#27272a'],
+      light: ['#18181b', '#3f3f46', '#71717a', '#a1a1aa']
+    },
+    glow: { dark: '#ffffff', light: '#71717a' },
+    noFocus: true
   },
   blue: {
     gap: 10,
@@ -652,8 +655,7 @@ export default function PixelCard({
 
   useEffect(() => {
     engineRef.current?.sync();
-    engineRef.current?.wake();
-  });
+  }, [variant, gap, speed, trigger]);
 
   return (
     <div

@@ -248,7 +248,7 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
       });
 
       if (response.ok) {
-        res.json({ success: true, message: 'Message sent via Resend.' });
+        res.json({ success: true, delivered: true, message: 'Message sent directly to inbox.' });
         return;
       }
       const errText = await response.text();
@@ -278,7 +278,7 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
       });
 
       const data = await response.json();
-      res.json(data);
+      res.json({ ...data, delivered: data.success === true });
       return;
     } catch (err: any) {
       console.error('Web3Forms error:', err);
@@ -290,7 +290,8 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
 
   res.json({
     success: true,
-    message: 'Message received! Thank you for reaching out.',
+    delivered: false,
+    message: 'Message logged. (Configure WEB3FORMS_ACCESS_KEY or RESEND_API_KEY in Vercel to receive emails directly in your inbox).',
   });
 });
 
