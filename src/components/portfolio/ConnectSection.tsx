@@ -113,9 +113,12 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
     setStatusMessage("");
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://formspree.io/f/xqppdlyr", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
@@ -128,22 +131,20 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
         throw new Error("Unable to send message directly right now.");
       }
 
-      const data = await response.json().catch(() => ({}));
-      if (data.delivered) {
+      const data = await response.json();
+      if (data.ok) {
         setStatus("success");
-        setStatusMessage("Your message has been sent directly to Ruchir's inbox!");
+        setStatusMessage("Your message has been sent successfully to my inbox! I'll get back to you soon.");
+        setName("");
+        setEmail("");
+        setSubject("");
+        setMessage("");
       } else {
-        setStatus("notice");
-        setStatusMessage("Message recorded! To guarantee instant delivery, click below to open in your mail app:");
+        throw new Error("Formspree response not ok");
       }
-
-      setName("");
-      setEmail("");
-      setSubject("");
-      setMessage("");
     } catch {
       setStatus("error");
-      setStatusMessage("Could not connect to server. You can send directly via your mail app below:");
+      setStatusMessage("Could not send via Formspree right now. You can send directly via your mail app below:");
     } finally {
       setIsSubmitting(false);
     }
@@ -293,7 +294,12 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
                     </p>
                   </div>
 
-                  <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+                  <form
+                    action="https://formspree.io/f/xqppdlyr"
+                    method="POST"
+                    onSubmit={handleSubmit}
+                    className="mt-6 space-y-4"
+                  >
                     {/* Name & Email */}
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <div>
@@ -305,6 +311,7 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
                         </label>
                         <input
                           id="contact-name"
+                          name="name"
                           type="text"
                           required
                           placeholder="Your name"
@@ -323,6 +330,7 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
                         </label>
                         <input
                           id="contact-email"
+                          name="email"
                           type="email"
                           required
                           placeholder="you@example.com"
@@ -343,6 +351,7 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
                       </label>
                       <input
                         id="contact-subject"
+                        name="subject"
                         type="text"
                         placeholder="What's this about?"
                         value={subject}
@@ -361,6 +370,7 @@ export function ConnectSection({ connect }: ConnectSectionProps) {
                       </label>
                       <textarea
                         id="contact-message"
+                        name="message"
                         required
                         rows={4}
                         placeholder="Tell me a bit more..."

@@ -228,7 +228,32 @@ app.post('/api/contact', async (req: express.Request, res: express.Response) => 
     return;
   }
 
-  // If RESEND_API_KEY is configured
+  // Primary: Formspree (xqppdlyr)
+  try {
+    const fsResponse = await fetch('https://formspree.io/f/xqppdlyr', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        subject: subject ? `[Portfolio] ${subject}` : `New message from ${name}`,
+        message,
+      }),
+    });
+
+    const fsData = await fsResponse.json();
+    if (fsData.ok) {
+      res.json({ success: true, delivered: true, message: 'Message sent via Formspree.' });
+      return;
+    }
+  } catch (err: any) {
+    console.error('Formspree server error:', err);
+  }
+
+  // Fallback: If RESEND_API_KEY is configured
   const resendApiKey = process.env.RESEND_API_KEY;
   if (resendApiKey) {
     try {
