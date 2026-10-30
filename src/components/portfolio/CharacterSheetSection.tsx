@@ -210,7 +210,7 @@ export function CharacterSheetSection({ about }: CharacterSheetSectionProps) {
 
                   {/* Email — #EA4335 Gmail red */}
                   <ConnectButton
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=rj863093701@gmail.com&su=Portfolio%20Inquiry"
+                    href="#connect"
                     label="Email"
                     iconColor="#EA4335"
                     icon={

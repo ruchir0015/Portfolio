@@ -219,4 +219,79 @@ const ttsHandler = async (req: express.Request, res: express.Response) => {
 app.post('/api/tts', ttsHandler);
 app.post('/api/chat/tts', ttsHandler);
 
+// Contact Form Endpoint
+app.post('/api/contact', async (req: express.Request, res: express.Response) => {
+  const { name, email, subject, message } = req.body;
+
+  if (!name || !email || !message) {
+    res.status(400).json({ error: 'Name, email, and message are required.' });
+    return;
+  }
+
+  // If RESEND_API_KEY is configured
+  const resendApiKey = process.env.RESEND_API_KEY;
+  if (resendApiKey) {
+    try {
+      const response = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${resendApiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          from: 'Portfolio Contact <onboarding@resend.dev>',
+          to: ['rj863093701@gmail.com'],
+          reply_to: email,
+          subject: subject ? `[Portfolio] ${subject}` : `New message from ${name}`,
+          text: `Name: ${name}\nEmail: ${email}\nSubject: ${subject || 'No subject'}\n\nMessage:\n${message}`,
+        }),
+      });
+
+      if (response.ok) {
+        res.json({ success: true, message: 'Message sent via Resend.' });
+        return;
+      }
+      const errText = await response.text();
+      console.error('Resend error:', errText);
+    } catch (err: any) {
+      console.error('Resend error:', err);
+    }
+  }
+
+  // If WEB3FORMS_ACCESS_KEY is configured
+  const web3formsKey = process.env.WEB3FORMS_ACCESS_KEY;
+  if (web3formsKey) {
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: web3formsKey,
+          name,
+          email,
+          subject: subject ? `[Portfolio] ${subject}` : `New message from ${name}`,
+          message,
+        }),
+      });
+
+      const data = await response.json();
+      res.json(data);
+      return;
+    } catch (err: any) {
+      console.error('Web3Forms error:', err);
+    }
+  }
+
+  // Log inquiry to console
+  console.log(`[Contact Submission] From: ${name} <${email}> | Subject: ${subject}\nMessage:\n${message}`);
+
+  res.json({
+    success: true,
+    message: 'Message received! Thank you for reaching out.',
+  });
+});
+
 export default app;
